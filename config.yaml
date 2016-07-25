@@ -1,0 +1,68 @@
+# path to a directory with all packages
+storage: ./npm_repo
+
+users:
+  admin:
+    # crypto.createHash('sha1').update(pass).digest('hex')
+    password: 3ceb30ed846271e0ee292e718ed43c5762dd0dbd
+
+web:
+  # web interface is disabled by default in 0.x, will be enabled soon in 1.x
+  # when all its issues will be fixed
+  #
+  # set this to `true` if you want to experiment with web ui now;
+  # this has a lot of issues, e.g. no auth yet, so use at your own risk
+  #enable: true
+
+  title: Sinopia
+  # logo: logo.png
+  # template: custom.hbs
+
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+
+    # amount of time to wait for repository to respond
+    # before giving up and use the local cached copy
+    timeout: 30s
+
+    # maximum time in which data is considered up to date
+    #
+    # default is 2 minutes, so server won't request the same data from
+    # uplink if a similar request was made less than 2 minutes ago
+    maxage: 2m
+
+    # if two subsequent requests fail, no further requests will be sent to
+    # this uplink for five minutes
+    #max_fails: 2
+    fail_timeout: 5m
+
+    # timeouts are defined in the same way as nginx, see:
+    # http://wiki.nginx.org/ConfigNotation
+
+packages:
+  # uncomment this for packages with "local-" prefix to be available
+  # for admin only, it's a recommended way of handling private packages
+  #'local-*':
+  #  access: admin
+  #  publish: admin
+  #  # you can override storage directory for a group of packages this way:
+  #  storage: 'local_storage'
+
+  '*':
+    # allow all users to read packages (including non-authenticated users)
+    #
+    # you can specify usernames/groupnames (depending on your auth plugin)
+    # and three keywords: "$all", "$anonymous", "$authenticated"
+    access: $all
+
+    # allow 'admin' to publish packages
+    publish: admin
+
+    # if package is not available locally, proxy requests to 'npmjs' registry
+    proxy: npmjs
+
+logs:
+  - {type: stdout, format: pretty, level: http}
+
+max_body_size: 1mb

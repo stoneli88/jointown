@@ -1,0 +1,49 @@
+{
+  "name": "boss",
+  "version": "0.0.1",
+  "description": "Covert old BOSS system, from jsp to native html.",
+  "repository": "currently no have.",
+  "readme": "README.md",
+  "license": "private",
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "babel": "6.3.13",
+    "babel-core": "6.1.18",
+    "babel-loader": "6.1.0",
+    "babel-plugin-add-module-exports": "0.1.2",
+    "babel-preset-es2015": "6.3.13",
+    "babel-preset-stage-2": "^6.5.0",
+    "chunk-manifest-webpack-plugin": "^0.1.0",
+    "clean-webpack-plugin": "^0.1.10",
+    "copy-webpack-plugin": "^3.0.1",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "image-webpack-loader": "^1.8.0",
+    "node-sass": "^3.8.0",
+    "postcss-assets": "^4.1.0",
+    "postcss-loader": "^0.9.1",
+    "precss": "^1.4.0",
+    "purify": "^3.3.1",
+    "purifycss-webpack-plugin": "^2.0.3",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-manifest-plugin": "^1.0.1"
+  },
+  "engines": {
+    "node": ">=0.12"
+  },
+  "scripts": {
+    "publish": "webpack --progress --color --display-chunks --production",
+    "watch": "webpack --progress --color --display-chunks --display-reasons --watch",
+    "server": "webpack-dev-server --color --inline --compress",
+    "develop": "start /min npm run watch & start /min npm run server"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "jquery": "^1.12.3"
+  }
+}
