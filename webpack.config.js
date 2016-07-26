@@ -17,9 +17,6 @@ var Purify = require("purifycss-webpack-plugin");
 
 var libsDir = __dirname + '/app/libs';
 
-// 本平台的共有组件.
-var sharedAssetsUrl = '/commons/';
-
 // 分为2种不同的方式处理问题.
 var extractCSS = new ExtractTextPlugin('../styles/[name].[chunkhash].css');
 var extractLESS = new ExtractTextPlugin('../styles/[name].[chunkhash].less');
@@ -78,13 +75,15 @@ if (env === '--production') {
     }));
 
     // optimization for stylesheets.
-    new Purify({
-        basePath: __dirname,
-        paths: [
-            "public/*.html",
-            "public/pages/*.html"
-        ]
-    })
+    plugins.push(
+        new Purify({
+            basePath: __dirname,
+            paths: [
+                "public/*.html",
+                "public/pages/*.html"
+            ]
+        })
+    );
 
     plugins.push(new webpack.optimize.OccurenceOrderPlugin());
 
