@@ -14,7 +14,7 @@ web:
   # this has a lot of issues, e.g. no auth yet, so use at your own risk
   #enable: true
 
-  title: Sinopia
+  title: Jointown NPM Server
   # logo: logo.png
   # template: custom.hbs
 
@@ -24,7 +24,7 @@ uplinks:
 
     # amount of time to wait for repository to respond
     # before giving up and use the local cached copy
-    timeout: 30s
+    timeout: 60s
 
     # maximum time in which data is considered up to date
     #
@@ -34,8 +34,8 @@ uplinks:
 
     # if two subsequent requests fail, no further requests will be sent to
     # this uplink for five minutes
-    #max_fails: 2
-    fail_timeout: 5m
+    max_fails: 10
+    fail_timeout: 1m
 
     # timeouts are defined in the same way as nginx, see:
     # http://wiki.nginx.org/ConfigNotation
@@ -43,11 +43,10 @@ uplinks:
 packages:
   # uncomment this for packages with "local-" prefix to be available
   # for admin only, it's a recommended way of handling private packages
-  #'local-*':
-  #  access: admin
-  #  publish: admin
-  #  # you can override storage directory for a group of packages this way:
-  #  storage: 'local_storage'
+  'jzt-*':
+    access: $all
+    publish: admin
+    storage: 'jzt_storage'
 
   '*':
     # allow all users to read packages (including non-authenticated users)
@@ -65,4 +64,7 @@ packages:
 logs:
   - {type: stdout, format: pretty, level: http}
 
-max_body_size: 100mb
+max_body_size: 101mb
+
+#pecify listen address (or simply a port)
+listen: 0.0.0.0:4873

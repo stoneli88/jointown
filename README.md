@@ -67,7 +67,10 @@ webpack在构建方面我们做了如下工作：
 
 首先从git或svn上拉取代码到本地后，进入当前仓库根目录下，打开CMD或是Terminal：
 
+**npm set registry http://localhost:4873(此处的loaclhost会替换为服务器真实地址)**
+
 **npm install**, **npm install -g webpack**
+
 
 如果是window环境: 
 

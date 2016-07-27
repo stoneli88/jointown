@@ -1,0 +1,16 @@
+{
+  "name": "lnpm-showcase",
+  "version": "1.0.0",
+  "description": "local npm repos demo,",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "local",
+    "npm",
+    "sinopia"
+  ],
+  "author": "li liang",
+  "license": "ISC"
+}
