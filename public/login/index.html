@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <title>管理员登录</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="assets/styles/kendo.common-material.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles/kendo.material.min.css">
+    <link rel="stylesheet" href=../assets/styles/login.css>
+</head>
+
+<body>
+    <div class="boss-wrapper">
+        <form class="boss-login-form">
+            <div class="title">登录您的账户</div>
+            <div class="form-element">
+                <input data-bind="value: username" type="text" name="uname" required placeholder="请输入用户名">
+            </div>
+            <div class="form-element">
+                <input data-bind="value: upassword" type="password" name="upwd" required placeholder="请输入密码">
+            </div>
+            <div class="form-buttons">
+                <button class="k-primary k-button" type="submit" data-bind="click: login">登录</button>
+                <button class="k-button" type="reset">重置</button>
+            </div>
+        </form>
+    </div>
+    <script src=../assets/js/commons.js></script>
+    <script src=../assets/js/login.js></script>
+</body>
+
+</html>

@@ -19,6 +19,8 @@
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
+    "gulp": "^3.9.1",
+    "gulp-compile-handlebars": "^0.6.1",
     "image-webpack-loader": "^1.8.0",
     "node-sass": "^3.8.0",
     "postcss-assets": "^4.1.0",
@@ -26,6 +28,7 @@
     "precss": "^1.4.0",
     "purify": "^3.3.1",
     "purifycss-webpack-plugin": "^2.0.3",
+    "run-sequence": "^1.2.2",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
@@ -39,7 +42,7 @@
   "scripts": {
     "publish": "webpack --progress --color --display-chunks --production",
     "watch": "webpack --progress --color --display-chunks --display-reasons --watch",
-    "server": "webpack-dev-server --color --inline --compress",
+    "server": "webpack-dev-server --color --inline --compress --port 8090",
     "develop": "start /min npm run watch & start /min npm run server"
   },
   "dependencies": {

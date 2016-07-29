@@ -18,11 +18,8 @@ var Purify = require("purifycss-webpack-plugin");
 var libsDir = __dirname + '/app/libs';
 
 // 分为2种不同的方式处理问题.
-var extractCSS = new ExtractTextPlugin('../styles/[name].css');
-var extractLESS = new ExtractTextPlugin('../styles/[name].less');
-
-// 区分开发或是生产环境
-var env = process.argv.slice(-1).pop();
+var extractCSS = new ExtractTextPlugin('../styles/[name].[chunkhash].css');
+var extractLESS = new ExtractTextPlugin('../styles/[name].[chunkhash].less');
 
 // 需要加载的插件
 var plugins = [
@@ -39,15 +36,55 @@ var plugins = [
     extractLESS
 ];
 
-// generate hash json file.
-plugins.push(new ManifestPlugin());
-
 // webpack编译文件的PATH配置.
 var output = {
-    path: __dirname + '/public/assets/js',
+    path: './public/assets/js',
     publicPath: './public',
     filename: '[name].js'
 };
+
+// 生产环境打包需要minimize.
+plugins.push(new UglifyJsPlugin({
+    minimize: true,
+    beautify: true,
+    compress: {
+        warnings: false
+    },
+    mangle: {
+        except: ['$super', '$', 'exports', 'require']
+    }
+}));
+
+// 清理已经编译的文件.
+plugins.push(new CleanWebpackPlugin(['./public/assets/js', './public/assets/images', './public/assets/styles'], {
+    verbose: true,
+    dry: false
+}));
+
+// generate hash json file.
+plugins.push(new ManifestPlugin());
+
+// chunkhash.
+plugins.push(new ChunkManifestPlugin({
+    filename: "chunk-manifest.json",
+    manifestVariable: "webpackManifest"
+}));
+
+// optimization for stylesheets.
+plugins.push(
+    new Purify({
+        basePath: __dirname,
+        paths: [
+            "public/*.html",
+            "public/pages/*.html"
+        ]
+    })
+);
+
+plugins.push(new webpack.optimize.OccurenceOrderPlugin());
+
+// Don’t use [chunkhash] in development since this will increase compilation time
+output.filename = '[name].[chunkhash].js';
 
 // webpack的核心配置.
 var config = {
@@ -119,10 +156,6 @@ var config = {
                 loadPaths: ['assets/', 'assets/images']
             })
         ];
-    },
-    devServer: {
-        contentBase: './public',
-        hot: true
     }
 };
 

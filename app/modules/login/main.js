@@ -7,13 +7,28 @@ var PATH = require('../constants').PATH;
 var kendo = require('kendo.binder');
 require('jqBackstretch');
 
+// 登录
+var doLogin = function(username, password) {
+    return $.ajax({
+        method: 'POST',
+        url: '/operator/BSlogin.json',
+        dataType: 'json',
+        data: {
+            loginName: username,
+            password: password
+        }
+    })
+}
+
 // 创建登录VM对象
 var loginVM = kendo.observable({
     username: "",
     upassword: "",
-    login: function(e) {
+    login: function (e) {
         e.preventDefault();
-        alert("你很忙好, " + this.username + " !!!"); 
+        doLogin(this.username, this.upassword).done(function(ret) {
+            console.log(ret.msg);
+        });
         return false;
     }
 });
