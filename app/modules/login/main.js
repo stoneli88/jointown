@@ -11,14 +11,14 @@ require('jqBackstretch');
 var doLogin = function(username, password) {
     return $.ajax({
         method: 'POST',
-        url: '/operator/BSlogin.json',
+        url: '/operator/BSlogin',
         dataType: 'json',
         data: {
             loginName: username,
             password: password
         }
     })
-}
+};
 
 // 创建登录VM对象
 var loginVM = kendo.observable({

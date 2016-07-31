@@ -86,14 +86,14 @@ gulp.task('prod', function(){
 
 // 处理编译过程中的问题.
 function onBuild(done) {
-    return function (err, stats) {
+    return function(err, stats) {
         if (err) {
             gutil.log('Error', err);
             if (done) {
                 done();
             }
         } else {
-            Object.keys(stats.compilation.assets).forEach(function (key) {
+            Object.keys(stats.compilation.assets).forEach(function(key) {
                 gutil.log('Webpack: output ', gutil.colors.green(key));
             });
             gutil.log('Webpack: ', gutil.colors.blue('finished ', 'webpack:build'));
@@ -101,5 +101,5 @@ function onBuild(done) {
                 done();
             }
         }
-    }
+    };
 }
